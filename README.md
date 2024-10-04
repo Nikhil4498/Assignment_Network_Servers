@@ -33,4 +33,11 @@ sudo nano /etc/apache2/sites-available/awesomeweb.conf
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 
+# Enabling the new site and disable the default
+sudo a2ensite awesomeweb.conf
+sudo a2dissite 000-default.conf
+sudo systemctl reload apache2
+
+#Accessing Website
+Open a browser and type http://awesomeweb
 
