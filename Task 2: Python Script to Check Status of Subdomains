@@ -2,28 +2,48 @@
 pip install requests
 # Step 2: Write the Python Script
 Create a file subdomain_status_checker.py
+
 import requests
 import time
+from prettytable import PrettyTable
 
-subdomains = ["http://sub1.awesomeweb", "http://sub2.awesomeweb"]  # Add your subdomains here
+# Add your subdomains here
+subdomains = ["http://sub1.awesomeweb", "http://sub2.awesomeweb"]
 
 def check_subdomains():
-    print(f"{'Subdomain':<30}{'Status':<10}")
-    print("-" * 40)
+    # Create a PrettyTable object with column headers 'Subdomain' and 'Status'
+    table = PrettyTable()
+    table.field_names = ["Subdomain", "Status"]
+    
+    # Check the status of each subdomain
     for subdomain in subdomains:
         try:
             response = requests.get(subdomain, timeout=5)
             if response.status_code == 200:
-                print(f"{subdomain:<30}Up")
+                table.add_row([subdomain, "Up"])
             else:
-                print(f"{subdomain:<30}Down")
+                table.add_row([subdomain, "Down"])
         except requests.exceptions.RequestException:
-            print(f"{subdomain:<30}Down")
+            table.add_row([subdomain, "Down"])
+    
+    # Print the table
+    print(table)
 
 if __name__ == "__main__":
     while True:
         check_subdomains()
         time.sleep(60)  # Check every 60 seconds
 
+
 # Step 3: Test the Script
 It should display the status of each subdomain every minute:
+
+# Result
+
+PS E:\DevOps Cloud\VS Code> & D:/python.exe "e:/DevOps Cloud/VS Code/subdomain_status_checker.py"
++------------------------+--------+
+|       Subdomain        | Status |
++------------------------+--------+
+| http://sub1.awesomeweb |  Down  |
+| http://sub2.awesomeweb |  Down  |
++------------------------+--------+
