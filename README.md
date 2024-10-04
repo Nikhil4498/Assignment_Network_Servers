@@ -1,43 +1,7 @@
-# Assignment_Network_Servers
-#verify that Apache2 is running
-sudo systemctl status apache2
-# Create a DNS Name ‘awesomeweb’
-sudo nano /etc/hosts
-127.0.0.1 awesomeweb
-# Creating Website Files
-sudo mkdir /var/www/awesomeweb
-# Set the correct permissions
-sudo chown -R $USER:$USER /var/www/awesomeweb
-sudo chmod -R 755 /var/www/awesomeweb
-# Creating a simple HTML file
-nano /var/www/awesomeweb/index.html
+# DevOps Assignment: Hosting a Website, Subdomain Status Checker, and Virtual Machine Scanning
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome to AwesomeWeb</title>
-</head>
-<body>
-    <h1>Hello, this is AwesomeWeb!</h1>
-</body>
-</html>
+This repository contains the following tasks:
 
-# Configure Apache to Serve Website
-sudo nano /etc/apache2/sites-available/awesomeweb.conf
-
-<VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    ServerName awesomeweb
-    DocumentRoot /var/www/awesomeweb
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-
-# Enabling the new site and disable the default
-sudo a2ensite awesomeweb.conf
-sudo a2dissite 000-default.conf
-sudo systemctl reload apache2
-
-#Accessing Website
-Open a browser and type http://awesomeweb
-
+Hosting a website on Apache2 and creating a custom DNS name (awesomeweb).
+Writing a Python script to check the status of subdomains and display the results in a tabular format.
+Installing and configuring a Virtual Machine (VM) using VirtualBox, hosting a website using Nginx, and scanning the VM with Nmap.
