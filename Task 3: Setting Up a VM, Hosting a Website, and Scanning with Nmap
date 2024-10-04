@@ -1,0 +1,61 @@
+# Step 1: Install VirtualBox
+Follow the steps mentioned in the assignment
+# Step 2: Create and Configure the VM
+Open the Virtual Box give every details as mentioned in the page but instaed of giving ISO use the dowloaded file as a harddisk
+
+Attach the .vdi File as a Hard Disk:
+
+Click the Add Hard Disk button (green plus sign icon).
+In the dialog box, choose the option to Select Existing Disk.
+Navigate to your downloaded Ubuntu .vdi file and select it.
+
+# Step 3: Host a Website on Nginx
+Navigate to the default Nginx web directory
+cd /var/www/html
+Replace the existing index.html file
+sudo mv index.nginx-debian.html index.html
+sudo nano index.html
+<html>
+<head>
+    <title>My Awesome Website</title>
+</head>
+<body>
+    <h1>Hello from Nginx on Ubuntu!</h1>
+</body>
+</html>
+
+Check the website: http://<VM-IP>
+To fetch VM IP run the command "ip a" or 'ifconfig' or 'hostnam -i'
+
+Look for the IP address under your network interface, typically something like 192.168.x.x or 10.0.x.x.
+
+# Step 6: Scan the VM from Your Host Machine Using Nmap
+Install Nmap on host machine:
+sudo apt install nmap
+nmap <VM-IP>
+
+# Result
+
+nikhil@LAPTOP-PM5K09G5:~$ nmap 10.0.2.15
+Starting Nmap 7.80 ( https://nmap.org ) at 2024-10-04 21:35 IST
+Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
+Nmap done: 1 IP address (0 hosts up) scanned in 3.02 seconds
+nikhil@LAPTOP-PM5K09G5:~$ nmap 127.0.1.1
+Starting Nmap 7.80 ( https://nmap.org ) at 2024-10-04 21:36 IST
+Nmap scan report for LAPTOP-PM5K09G5. (127.0.1.1)
+Host is up (0.000062s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 0.03 seconds
+nikhil@LAPTOP-PM5K09G5:~$ nmap 127.0.0.1
+Starting Nmap 7.80 ( https://nmap.org ) at 2024-10-04 21:40 IST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000064s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 0.03 seconds
+
